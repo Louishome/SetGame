@@ -19,6 +19,10 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBOutlet var cardButtons: [UIButton]!
+    @IBAction func touchCardButton(_ sender: UIButton) {
+
+    }
 
 
 }
