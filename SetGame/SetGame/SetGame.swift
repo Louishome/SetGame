@@ -14,9 +14,12 @@ struct SetGame {
     public static let numberOfTotalCard = numberOfFeatureValue ^^ numberOfFeatureType
     public static let numberOfCardInASet = 3
     public static let numberOfCardOnBoardInitial = 12
-    private var cardsOnBoard: [Card]
-    private var cardsInDeck: [Card]
-    private var selectedCards: [Card]
+
+    private var cards:[Card]
+    public var cardsUnselected: [Int]
+    public var cardsInDeck: [Int]
+    public var cardsSelected: [Int]
+    public var cardsMatched: [Int]
 
     var acceptableBitwiseValues: [Int] {
         get {
@@ -33,13 +36,13 @@ struct SetGame {
     }
 
     init() {
-        cardsInDeck = [Card]()
-        cardsOnBoard = [Card]()
-        selectedCards = [Card]()
-        prepareAllCards(type: 0, value: 0, featuresBucket: [Feature](), deck: &cardsInDeck)
+        cards = [Card]()
+        (cardsInDeck, cardsUnselected, cardsSelected, cardsMatched) = ([], [], [], [])
+        prepareAllCards(type: 0, value: 0, featuresBucket: [Feature](), deck: &cards)
+        cardsInDeck = Array(cards.indices)
         for _ in 0..<SetGame.numberOfCardOnBoardInitial {
             if let rendomCard = cardsInDeck.draw() {
-                cardsOnBoard.append(rendomCard)
+                cardsUnselected.append(rendomCard)
             }
         }
     }

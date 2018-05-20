@@ -10,11 +10,11 @@ import Foundation
 
 struct Card {
     public let cardFeatures: [Feature]
-    static let cardFeatureTypes: [FeatureType] = [.color, .number, .shape, .shade]
+    static let cardFeatureTypes: [FeatureType] = [.shape, .number, .color, .shade]
     public var cardPatternString: NSMutableAttributedString {
         get {
             let outputString = NSMutableAttributedString(string: "")
-            return cardFeatures.map { (n) -> FeatureProtocol in createFeature(with: n) }.reduce(outputString)  { $1.applyFeature(to: $0) }
+            return cardFeatures.map { (n) -> FeatureProtocol in createFeature(with: n) }.reduce(outputString) { $1.applyFeature(to: $0) }
         }
     }
     init? (features: [Feature]) {
@@ -29,13 +29,13 @@ struct Card {
     func createFeature (with feature: Feature) -> FeatureProtocol{
         switch feature.type {
         case .color:
-            return ColorFeature(with: feature)
+            return ColorFeature(feature: feature)
         case .number:
-            return NumberFeature(with: feature)
+            return NumberFeature(feature: feature)
         case .shade:
-            return ShadeFeature(with: feature)
+            return ShadeFeature(feature: feature)
         case .shape:
-            return ShapeFeature(with: feature)
+            return ShapeFeature(feature: feature)
         }
     }
 }
